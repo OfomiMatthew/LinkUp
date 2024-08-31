@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Explore | LinkUp
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="columns is-multiline is-centered">
+    {% for post in posts %}
+    <div class="column is-one-quarter">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-square">
+            <img src="{{ post.image.url }}" alt="{{ post.caption }}">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="{{ post.image.url }}" alt="{{ post.user.username }}">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">{{ post.user}}</p>
+              <p class="subtitle is-6"><a href="/profile/{{post.user}}">@{{ post.user}}</a></p>
+            </div>
+          </div>
+
+          <div class="content">
+            <p>{{ post.caption }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

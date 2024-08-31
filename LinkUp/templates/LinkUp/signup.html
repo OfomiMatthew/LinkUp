@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+SignUp | LinkUp
+{% endblock title %}
+
+{% block content %}
+<div class="section">
+  <div class="container">
+   
+    <div class="columns is-centered">
+     
+      <div class="column is-half">
+        <h2 class="title has-text-centered">Sign Up</h2>
+        <!-- Display any invalid message -->
+        {% if invalid %}
+        <div class="notification is-danger">
+          {{ invalid }}
+        </div>
+        {% endif %}
+        
+        <!-- Signup form -->
+        <form action="" method="post" class="box">
+          {% csrf_token %}
+          <div class="field">
+            <label class="label" for="f_name">Username</label>
+            <div class="control">
+              <input class="input" type="text" name="f_name" id="f_name" placeholder="Username" required>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="email">Email</label>
+            <div class="control">
+              <input class="input" type="email" name="email_id" id="email" placeholder="Email" required>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="pass_word" id="password" placeholder="Password" required>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary is-fullwidth">Sign Up</button>
+            </div>
+          </div>
+          
+          <p class="has-text-centered">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,99 @@
+{% load static %}
+
+{% block content %}
+
+<div class="modal" id="edit-profile-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Edit Profile</p>
+      <button class="delete" aria-label="close" id="close-modal-btn"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Include the form for editing the profile -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Photo Upload Field -->
+        <div class="field">
+          <label class="label" for="image-upload" >Upload Image</label>
+          <div class="control">
+            <div class="file has-name is-boxed">
+             
+              
+          <input type="file" name="image" class="form-control " id="image-upload" accept="image/*" >
+            </div>
+          </div>
+        </div>
+
+      
+        
+
+        <!-- Bio Field -->
+        <div class="field">
+          <label class="label">Bio</label>
+          <div class="control">
+            <textarea class="textarea" name="bio" placeholder="Write a short bio...">{{ user_profile.bio }}</textarea>
+          </div>
+        </div>
+
+        <!-- Location Field -->
+        <div class="field">
+          <label class="label">Location</label>
+          <div class="control has-icons-left">
+            <input class="input" type="text" name="location" placeholder="Enter your location" value="{{ user_profile.location }}">
+            <span class="icon is-small is-left">
+              <i class="fas fa-map-marker-alt"></i>
+            </span>
+          </div>
+        </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button type="button" class="button is-secondary" id="close-modal-footer-btn">Close</button>
+      <button type="submit" class="button is-primary">Update Profile</button>
+    </footer>
+      </form>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% comment %} <script>
+  document.getElementById('image-upload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('preview');
+    const fileNameDisplay = document.getElementById('file-name');
+  
+    // Clear previous preview
+    preview.innerHTML = '';
+  
+    if (file) {
+      fileNameDisplay.textContent = file.name;
+  
+      const fileType = file.type.split('/')[0]; // Get the type (image, video, audio)
+  
+      if (fileType === 'image') {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        preview.appendChild(img);
+      } else if (fileType === 'video') {
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.controls = true;
+        video.style.maxWidth = '100%';
+        preview.appendChild(video);
+      } else if (fileType === 'audio') {
+        const audio = document.createElement('audio');
+        audio.src = URL.createObjectURL(file);
+        audio.controls = true;
+        preview.appendChild(audio);
+      } else {
+        preview.textContent = 'File type not supported for preview';
+      }
+    } else {
+      fileNameDisplay.textContent = 'No file selected';
+    }
+  });
+</script> {% endcomment %}

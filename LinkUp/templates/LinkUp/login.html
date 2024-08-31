@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login | Sphere
+{% endblock title %}
+
+{% block content %}
+<div class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h2 class="title has-text-centered">Login</h2>
+        
+        <!-- Display any invalid message -->
+        {% if invalid %}
+        <div class="notification is-danger">
+          {{ invalid }}
+        </div>
+        {% endif %}
+        
+        <!-- Login form -->
+        <form action="" method="post" class="box">
+          {% csrf_token %}
+          <div class="field">
+            <label class="label" for="username">Username</label>
+            <div class="control">
+              <input class="input" type="text" name="f_name" id="username" placeholder="Username" required>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="pass_word" id="password" placeholder="Password" required>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary is-fullwidth">Login</button>
+            </div>
+          </div>
+          
+          <p class="has-text-centered">
+            Don't have an account? <a href="{% url 'sign-up' %}">Sign Up</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

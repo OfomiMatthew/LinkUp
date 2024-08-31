@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ user_profile.user }}'s Profile | LinkUp
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      {% include "LinkUp/edit_profile.html" %}
+      
+      <!-- Profile Information Section -->
+      <div class="box has-text-centered">
+        <figure class="image is-128x128 is-inline-block">
+          <img class="is-rounded profile-img" src="{{ user_profile.profile_img.url }}" alt="{{ user_profile.user }}">
+        </figure>
+<br>
+<br> 
+        {% if user == user_profile.user %}
+        <div id="edit-profile-btn">
+          <a class="btn-floating btn-large waves-effect waves-light button is-primary">
+            <i class="material-icons">add</i>
+          </a>
+        </div>
+      
+        {% endif %}
+
+        <a class="title is-4 btn">@{{ user_profile.user }}</a>
+        <br>
+        <br>
+        <p class="subtitle is-6">{{ user_profile.bio }}</p>
+       
+        <p class="subtitle is-6 is-flex is-justify-content-center is-align-items-center">
+          <span class="icon is-small">
+            <i class="material-icons">add_location </i>
+          </span>
+          <span> {{ user_profile.location }}</span>
+        </p>
+
+        <p class="subtitle is-6">
+          
+          {% if user_posts_length <= 1 %}
+          <strong>{{ user_posts_length }}</strong> Post
+        
+            {% else %}
+          <strong>{{ user_posts_length }}</strong> Posts
+          {% endif %}
+        
+        </p>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item button is-primary" style="margin-right: 1rem;">
+            <span class="has-text-weight-bold">Followers:</span> {{ user_followers }}
+          </a>
+         
+          <a href="#" class="card-footer-item button is-primary">
+            <span class="has-text-weight-bold">Following:</span> {{ user_following }}
+          </a>
+        </footer>
+        <br>
+        {% include "LinkUp/follow.html" %}
+      </div>
+
+      <!-- User's Posts Section -->
+      <div class="box">
+        <h3 class="title is-5">Posts</h3>
+        <div class="columns is-multiline">
+          {% for post in user_posts %}
+            <div class="column is-half">
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="{{ post.image.url }}" alt="{{ post.caption }}">
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <div class="content">
+                    <p>{{ post.caption }}</p>
+                    <small>{{ post.created_at|date:"M d, Y" }}</small>
+                  </div>
+                </div>
+                
+                {% if user == user_profile.user %}
+                  
+                
+                  
+                <a href="/delete/{{post.id}}"><i class="material-icons">delete</i></a>
+                {% endif %}
+              </div>
+            </div>
+          {% empty %}
+            <p class="has-text-centered">No posts available.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+
+{% endblock content %}

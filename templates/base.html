@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item has-text-primary" href="{% url 'home' %}" style="font-family:cursive;font-weight:bold;">
+        <i class="material-icons">group</i>LinkUp
+      </a> 
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="{% url 'home' %}">Home</a>
+       
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">More</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="{% url 'explore' %}"><i class="material-icons">explore</i>Explore</a>
+            <a class="navbar-item" href="{% url 'profile' id_user=request.user%}"><i class="material-icons">person</i>Profile</a>
+            <a class="navbar-item create-post"><i class="material-icons">create</i>Create Post</a>
+            <a class="navbar-item" id="search"><i class="material-icons">search</i>Search</a>
+            <hr class="navbar-divider">
+          </div>
+        </div>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            {% if user.is_authenticated %}
+              <a class="button is-light"><strong>Hello {{user.username}}</strong></a>
+              <a class="button is-primary" href="{% url 'logout' %}"><strong>Logout</strong></a>
+            {% else %}
+              <a class="button is-primary" href="{% url 'sign-up' %}"><strong>Sign up</strong></a>
+              <a class="button is-light" href="{% url 'login' %}">Log in</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {% include "LinkUp/post_modal.html" %}
+  {% include "LinkUp/search.html" %}
+  
+  {% block content %}
+  {% endblock content %}
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Burger menu toggle
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.querySelector('.navbar-menu');
+
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+
+      // Modal functionality for Create Post
+      const modal = document.getElementById('create-post-modal');
+      const createPostButton = document.querySelector('.navbar-item.create-post');
+      const closeModalButton = modal.querySelector('.delete');
+      const cancelModalButton = modal.querySelector('.cancel-button');
+      const modalBackground = modal.querySelector('.modal-background');
+
+      createPostButton.addEventListener('click', () => {
+        modal.classList.add('is-active');
+      });
+
+      closeModalButton.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      });
+
+      cancelModalButton.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      });
+
+      modalBackground.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      });
+
+      // Modal functionality for Search
+      const searchModal = document.getElementById('exampleModal3');
+      const searchButton = document.getElementById('search');
+      const closeSearchModalButton = searchModal.querySelector('.del');
+      const searchModalBackground = searchModal.querySelector('.md-bg');
+
+      searchButton.addEventListener('click', () => {
+        searchModal.classList.add('is-active');
+      });
+
+      closeSearchModalButton.addEventListener('click', () => {
+        searchModal.classList.remove('is-active');
+      });
+
+      searchModalBackground.addEventListener('click', () => {
+        searchModal.classList.remove('is-active');
+      });
+    });
+  </script>
+</body>
+</html>

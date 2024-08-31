@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search Results | LinkUp
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <h1 class="title is-3">Search Results for "{{ query }}"</h1>
+
+  <section class="section">
+    <h2 class="subtitle is-4">User Profiles</h2>
+
+    <div class="columns is-multiline">
+      {% for user in users %}
+      <div class="column is-12-mobile is-6-tablet is-4-desktop">
+        <div class="card">
+          <div class="card-content">
+            <p class="title is-5">
+              <a href="/profile/{{ user.user.username }}" class="has-text-primary">@{{ user.user.username }}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="column">
+        <div class="notification is-light">
+          No users found.
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock content %}

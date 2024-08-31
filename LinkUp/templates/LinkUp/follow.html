@@ -1,0 +1,27 @@
+<div class="box has-text-centered" style="background: white;">
+  <form action="/follow" method="POST">
+    {% csrf_token %}
+    {% if user != user_profile.user %}
+    <input type="hidden" value="{{ user.username }}" name="follower" />
+    <input type="hidden" value="{{ user_object.username }}" name="user" />
+    
+    <div class="field is-grouped is-grouped-centered">
+      <p class="control">
+        <button type="submit" class="button is-primary is-outlined">
+          
+          <span class="icon">
+            {% if follow_unfollow == "Follow" %}
+            <i class="material-icons">person_add</i>
+            {% else %}
+            <i class="material-icons">person_remove</i>
+            {% endif %}
+          </span>
+
+          <span>{{ follow_unfollow }}</span>
+        </button>
+      </p>
+    </div>
+    
+    {% endif %}
+  </form>
+</div>

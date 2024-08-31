@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home | LinkUp
+{% endblock title %}
+
+{% block content %}
+<div class="container is-max-desktop">
+  <div class="feed-container">
+    {% for post in posts %}
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-2by2">
+            <img src="{{ post.image.url }}" alt="Placeholder image" />
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+          
+            <div class="media-content">
+              <p class="title is-4">{{ post.user }}</p>
+              <p class="subtitle is-6">
+                <a href="/profile/{{ post.user }}">@{{ post.user }}</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="content">
+            {{ post.caption }}
+   
+            <br />
+            <time datetime="{{ post.created_at }}">{{ post.created_at|date:"M d, Y" }}</time>
+            <div class="level is-mobile">
+              <div class="level-left">
+                <a href="{% url 'like-post' post.id %}">
+                  
+                  {% if post.no_of_likes %}
+                  <i class="material-icons">thumb_down</i>
+                  {% else %}
+                    
+                  <i class="material-icons">thumb_up</i>
+                  {% endif %}
+                </a>
+                <p class="subtitle is-6">
+                  {% if post.no_of_likes == 0 %}
+                    0 Likes
+                  {% elif post.no_of_likes == 1 %}
+                    Liked by {{ post.no_of_likes }} person
+                  {% else %}
+                    Liked by {{ post.no_of_likes }} people
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

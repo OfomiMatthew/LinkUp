@@ -1,0 +1,27 @@
+<div class="modal" id="exampleModal3">
+  <div class="modal-background md-bg"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Search</p>
+      <button class="delete del" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form method="get" action="{% url 'search' %}">
+        {% csrf_token %}
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <input type="text" name="q" placeholder="Search users and posts" class="input" aria-label="Search" />
+          </div>
+          <div class="control">
+            <button type="submit" class="button is-info">
+              <span class="icon">
+                <i class="material-icons">search</i>
+              </span>
+              <span>Search</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

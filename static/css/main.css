@@ -1,0 +1,55 @@
+.container {
+  max-width: 400px; /* Reduced width */
+  margin: 0 auto; /* Center the container */
+}
+
+.feed-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjusted min-width for narrower items */
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.feed-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2rem; /* Margin between items */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+}
+
+img.profile-img {
+  object-fit: contain; 
+  width: 50px;         
+  height: 50px;         
+  border-radius: 50%;  
+}
+
+.container.is-max-desktop {
+  max-width: 720px; /* Further reduced maximum width */
+  margin: 0 auto; /* Center the container */
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between cards */
+}
+
+.card {
+  border: 1px solid #ddd; /* Optional: add a border for better separation */
+  border-radius: 5px; /* Optional: add border radius for rounded corners */
+  overflow: hidden; /* Optional: ensure content doesn't overflow */
+}
+
