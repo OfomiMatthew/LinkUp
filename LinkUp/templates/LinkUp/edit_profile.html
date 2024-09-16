@@ -97,3 +97,23 @@
     }
   });
 </script> {% endcomment %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Get elements
+  const editProfileBtn = document.getElementById('edit-profile-btn');
+  const editProfileModal = document.getElementById('edit-profile-modal');
+  const closeModalBtns = editProfileModal.querySelectorAll('.delete, #close-modal-btn, .modal-background');
+
+  // Open modal
+  editProfileBtn.addEventListener('click', () => {
+    editProfileModal.classList.add('is-active');
+  });
+
+  // Close modal
+  closeModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      editProfileModal.classList.remove('is-active');
+    });
+  });
+});
+</script>

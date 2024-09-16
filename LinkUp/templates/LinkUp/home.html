@@ -5,8 +5,8 @@ Home | LinkUp
 {% endblock title %}
 
 {% block content %}
-<div class="container is-max-desktop">
-  <div class="feed-container">
+<div class="container is-max-desktop columns is-centered">
+  <div class="feed-container column is-three-quarters">
     {% for post in posts %}
       <div class="card">
         <div class="card-image">
@@ -34,12 +34,11 @@ Home | LinkUp
               <div class="level-left">
                 <a href="{% url 'like-post' post.id %}">
                   
-                  {% if post.no_of_likes %}
-                  <i class="material-icons">thumb_down</i>
-                  {% else %}
-                    
+                
                   <i class="material-icons">thumb_up</i>
-                  {% endif %}
+                  
+                    
+                  
                 </a>
                 <p class="subtitle is-6">
                   {% if post.no_of_likes == 0 %}
